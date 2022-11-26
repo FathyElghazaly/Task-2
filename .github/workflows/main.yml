@@ -1,0 +1,23 @@
+on:
+  push: 
+    branches:
+      -main
+
+
+
+jobs:
+  build:
+    runs-on: windows-latest 
+
+
+    steps:
+      - uses: actions/checkout@v3  
+
+      - name: "Login to Docker hub"
+        run: docker login --username FathyElghazaly --password dckr_pat_zNAzQMssCmgBx0Thjm3k7MkIDog
+
+      - name: "Building Docker Image"
+        run: docker build -t FathyElghazaly/image .
+      
+      - name: "Pushing to Docker hub"
+        run: docker push FathyElghazaly/image
